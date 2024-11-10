@@ -1,0 +1,363 @@
+<html><head><base href="." /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Dark Elixir Coffee Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Gothic+A1&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gothic A1', sans-serif;
+    background: #1a1a1a;
+    color: #d4b98c;
+  }
+
+  .header {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+    padding: 2rem;
+    text-align: center;
+    animation: fadeIn 2s ease-in;
+  }
+
+  .logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin: 1rem 0;
+  }
+
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    gap: 1rem;
+  }
+
+  .nav-tab {
+    background: #2a1810;
+    color: #d4b98c;
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .nav-tab.active {
+    background: #d4b98c;
+    color: #2a1810;
+  }
+
+  .content-section {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .content-section.active {
+    display: block;
+  }
+
+  .menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .menu-category {
+    margin-bottom: 2rem;
+  }
+
+  .menu-item {
+    background: rgba(20,20,20,0.9);
+    border: 1px solid #d4b98c;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .item-image {
+    width: 100%;
+    height: 150px;
+    background: #2a1810;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reservation-form, .checkout-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(20,20,20,0.9);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 0.5rem;
+    background: #2a1810;
+    border: 1px solid #d4b98c;
+    color: #d4b98c;
+    border-radius: 5px;
+  }
+
+  .events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .event-card {
+    background: rgba(20,20,20,0.9);
+    border: 1px solid #d4b98c;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .cart {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    background: #2a2a2a;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #d4b98c;
+  }
+
+  .submit-btn {
+    background: #d4b98c;
+    color: #2a1810;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <svg class="logo" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#2a1810"/>
+      <path d="M30 40 Q50 20 70 40 Q80 60 50 70 Q20 60 30 40" fill="#d4b98c"/>
+      <text x="50" y="45" text-anchor="middle" fill="#2a1810" style="font-size: 8px;">Dark</text>
+      <text x="50" y="55" text-anchor="middle" fill="#2a1810" style="font-size: 8px;">Elixir</text>
+    </svg>
+    <h1>Dark Elixir</h1>
+    <p>Discover the magical brew within</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('menu')">Menu</button>
+    <button class="nav-tab" onclick="showSection('reserve')">Reserve</button>
+    <button class="nav-tab" onclick="showSection('events')">Events</button>
+  </div>
+
+  <div id="menu-section" class="content-section active">
+    <div class="menu-container">
+      <!-- Menu items will be dynamically loaded here -->
+    </div>
+  </div>
+
+  <div id="reserve-section" class="content-section">
+    <form class="reservation-form">
+      <h2>Reserve for Event</h2>
+      <div class="form-group">
+        <input type="text" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="Phone" required>
+      </div>
+      <div class="form-group">
+        <input type="date" required>
+      </div>
+      <div class="form-group">
+        <input type="time" required>
+      </div>
+      <div class="form-group">
+        <input type="number" placeholder="Number of Guests" required>
+      </div>
+      <div class="form-group">
+        <textarea placeholder="Event Details" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Reserve</button>
+    </form>
+  </div>
+
+  <div id="events-section" class="content-section">
+    <div class="events-container">
+      <!-- Events will be dynamically loaded here -->
+    </div>
+  </div>
+
+  <div class="cart" id="cart">
+    <h3>Your Order</h3>
+    <div id="cart-items"></div>
+    <p>Total: Bs.<span id="cart-total">0.00</span></p>
+    <button class="submit-btn" onclick="showCheckoutForm()">Checkout</button>
+  </div>
+  
+<script>
+const menuItems = {
+  coffee: [
+    { id: 1, name: "Espresso", price: 10, description: "Pure coffee essence" },
+    { id: 2, name: "Americano", price: 10, description: "Diluted espresso" },
+    { id: 3, name: "Cappuccino", price: 10, description: "Equal parts espresso, steamed milk, and foam" },
+    { id: 4, name: "Latte", price: 10, description: "Espresso with steamed milk" }
+  ],
+  tea: [
+    { id: 5, name: "Black Tea", price: 8, description: "Classic black tea blend" },
+    { id: 6, name: "Green Tea", price: 8, description: "Traditional green tea" },
+    { id: 7, name: "Herbal Tea", price: 8, description: "Caffeine-free herbal blend" }
+  ],
+  pastries: [
+    { id: 8, name: "Pies", price: 14, description: "Fresh baked fruit pies" },
+    { id: 9, name: "Mochis", price: 14, description: "Japanese rice cake dessert" },
+    { id: 10, name: "Cupcakes", price: 14, description: "Assorted flavored cupcakes" },
+    { id: 11, name: "Crepes", price: 14, description: "Sweet or savory crepes" }
+  ],
+  coldDrinks: [
+    { id: 12, name: "Fruit Juices", price: 12, description: "Fresh squeezed natural juices" },
+    { id: 13, name: "Milkshakes", price: 15, description: "Creamy blended shakes" }
+  ]
+};
+
+const events = [
+  {
+    title: "Live Music Night",
+    date: "Every Friday",
+    description: "Local artists perform acoustic sets"
+  },
+  {
+    title: "Poetry Reading",
+    date: "First Sunday of Month",
+    description: "Open mic poetry sessions"
+  }
+];
+
+let cart = [];
+
+function renderMenu() {
+  const menuContainer = document.querySelector('.menu-container');
+  let menuHTML = '';
+  
+  for (const [category, items] of Object.entries(menuItems)) {
+    menuHTML += `
+      <div class="menu-category">
+        <h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+        ${items.map(item => `
+          <div class="menu-item">
+            <div class="item-image">
+              <svg width="50" height="50" viewBox="0 0 50 50">
+                <circle cx="25" cy="25" r="20" fill="#d4b98c"/>
+              </svg>
+            </div>
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <p>Bs. ${item.price}</p>
+            <button class="submit-btn" onclick="addToCart(${item.id})">Add to Cart</button>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+  
+  menuContainer.innerHTML = menuHTML;
+}
+
+function renderEvents() {
+  const eventsContainer = document.querySelector('.events-container');
+  eventsContainer.innerHTML = events.map(event => `
+    <div class="event-card">
+      <h3>${event.title}</h3>
+      <p>${event.date}</p>
+      <p>${event.description}</p>
+    </div>
+  `).join('');
+}
+
+function showSection(sectionName) {
+  document.querySelectorAll('.content-section').forEach(section => {
+    section.classList.remove('active');
+  });
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  document.getElementById(`${sectionName}-section`).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function addToCart(itemId) {
+  const item = [...Object.values(menuItems).flat()].find(item => item.id === itemId);
+  cart.push(item);
+  updateCart();
+}
+
+function updateCart() {
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  
+  cartItems.innerHTML = cart.map(item => `
+    <div>
+      <p>${item.name} - Bs. ${item.price}</p>
+    </div>
+  `).join('');
+  
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  cartTotal.textContent = total.toFixed(2);
+}
+
+function showCheckoutForm() {
+  if (cart.length === 0) {
+    alert('Please add items to your cart first!');
+    return;
+  }
+  
+  const checkoutForm = document.createElement('div');
+  checkoutForm.innerHTML = `
+    <form class="checkout-form">
+      <h2>Checkout</h2>
+      <div class="form-group">
+        <input type="text" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="Phone" required>
+      </div>
+      <div class="form-group">
+        <textarea placeholder="Delivery Address" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Complete Order</button>
+    </form>
+  `;
+  
+  document.getElementById('menu-section').appendChild(checkoutForm);
+}
+
+// Initialize the page
+renderMenu();
+renderEvents();
+</script>
+
+</body>
+</html>
